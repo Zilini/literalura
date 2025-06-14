@@ -14,6 +14,7 @@ public class Libros {
     @Column(unique = true)
     private String titulo;
     private String autor;
+    private String idioma;
     private Double decargas;
     private LocalDate fechaNacimiento;
     private  LocalDate fechaMuerte;
