@@ -1,12 +1,21 @@
 package com.readmore.literalura;
 
 import com.readmore.literalura.principal.Principal;
+import com.readmore.literalura.repository.LibrosRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class LiteraluraApplication implements CommandLineRunner {
+
+	@Autowired
+	private LibrosRepository repository;
+
+	@Autowired
+	private ApplicationContext context;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LiteraluraApplication.class, args);
@@ -14,7 +23,9 @@ public class LiteraluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Principal principal = new Principal(repositoy);
+		Principal principal = new Principal(repository);
 		principal.mostrarMenu();
+
+		SpringApplication.exit(context);
 	}
 }

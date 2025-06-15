@@ -12,25 +12,25 @@ public class Libros {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @Column(unique = true)
     private String titulo;
-    private List<DatosAutor> autor;
+    private String autor;
     private List<String> idioma;
     private Double decargas;
-
+    @ManyToOne
+    private Autor aut;
 
     public Libros (){}
 
     public Libros (DatosLibros datosLibros) {
         this.titulo = datosLibros.titulo();
-        this.autor = datosLibros.autor();
+        this.autor = String.valueOf(datosLibros.autor());
         this.idioma = datosLibros.idiomas();
         this.decargas = OptionalDouble.of(Double.valueOf(datosLibros.descargas())).orElse(0);
     }
 
     @Override
     public String toString() {
-        return 
+        return
                 ", Titulo: " + titulo + '\'' +
                 ", Autor: " + autor +
                 ", Idiomas: " + idioma +
@@ -53,11 +53,11 @@ public class Libros {
         this.titulo = titulo;
     }
 
-    public List<DatosAutor> getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(List<DatosAutor> autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
@@ -75,5 +75,13 @@ public class Libros {
 
     public void setDecargas(Double decargas) {
         this.decargas = decargas;
+    }
+
+    public Autor getAut() {
+        return aut;
+    }
+
+    public void setAut(Autor aut) {
+        this.aut = aut;
     }
 }
